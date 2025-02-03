@@ -38,7 +38,6 @@ def calculate_tax(income):
         start_limit += slab
 
     # Marginal relief (if applicable)
-    tax_without_relief = tax
     if taxable_income > 1200000:
         excess_income = taxable_income - 1200000
         max_additional_tax = excess_income  # Maximum additional tax allowed for relief
@@ -66,4 +65,13 @@ if st.button("Calculate Tax"):
     # Show tax breakup if requested
     if st.checkbox("Show Tax & Cess Breakup"):
         st.write("### **Tax Breakdown:**")
-        for start, end, rate
+        for start, end, rate, slab_tax in tax_breakup:
+            st.write(f"₹{start} - ₹{end} @ {rate}% = ₹{slab_tax}")
+
+        st.write(f"### **Cess (4%) = ₹{cess}**")
+
+# Footer with aesthetically matching color
+st.markdown(
+    '<p style="color:#0047AB; font-size:16px; font-weight:bold; text-align:center;">Created by - Paramjeet Singh Gusain</p>',
+    unsafe_allow_html=True
+)
