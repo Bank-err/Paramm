@@ -54,8 +54,30 @@ st.title("💰 Bank-err's Income Tax Calculator for FY 2025-26")
 st.write("### **As per new tax regime**")
 st.write("### **Marginal income relief applied**")
 
-# User Input
-income = st.number_input("Enter your Annual Income (in ₹)", min_value=0, step=1000)
+# Custom styling for input field
+st.markdown(
+    """
+    <style>
+    div[data-baseweb="input"] {
+        width: 400px !important;
+        border: 2px solid #ff6347;
+        border-radius: 10px;
+        font-size: 18px;
+        padding: 10px;
+        background-color: #f8f9fa;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True,
+)
+
+# Bigger, colorful income input field
+income = st.number_input(
+    "Enter your Annual Income (in ₹)",
+    min_value=0,
+    step=1000,
+    format="%d",
+)
 
 # Calculate Tax
 if st.button("Calculate Tax"):
@@ -66,7 +88,7 @@ if st.button("Calculate Tax"):
     if st.checkbox("Show Tax & Cess Breakup"):
         st.write("### **Tax Breakdown:**")
         for start, end, rate, slab_tax in tax_breakup:
-            st.write(f"₹{start} - ₹{end} @ {rate}% = ₹{slab_tax}")
+            st.markdown(f"✔ **₹{start} - ₹{end} @ {rate}%** = ₹{slab_tax}")
 
         st.write(f"### **Cess (4%) = ₹{cess}**")
 
