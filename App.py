@@ -70,8 +70,8 @@ if st.button("Calculate Tax"):
 
         st.write(f"### **Cess (4%) = ₹{cess}**")
 
-# Footer with aesthetically matching color
+# Footer with cyan-colored text
 st.markdown(
-    '<p style="color:#0047AB; font-size:16px; font-weight:bold; text-align:center;">Created by - Paramjeet Singh Gusain</p>',
+    '<p style="color:cyan; font-size:16px; font-weight:bold; text-align:center;">Created by - Paramjeet Singh Gusain</p>',
     unsafe_allow_html=True
 )
