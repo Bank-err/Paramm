@@ -25,16 +25,11 @@ def calculate_tax(income):
     tax_breakup = []
 
     for slab, rate in TAX_SLABS:
-        if remaining_income > slab:
-            slab_tax = slab * rate
+        if remaining_income > 0:
+            slab_tax = min(slab, remaining_income) * rate
             tax += slab_tax
-            tax_breakup.append((start_limit, start_limit + slab, rate * 100, slab_tax))
-            remaining_income -= slab
-        else:
-            slab_tax = remaining_income * rate
-            tax += slab_tax
-            tax_breakup.append((start_limit, start_limit + remaining_income, rate * 100, slab_tax))
-            break
+            tax_breakup.append((start_limit, start_limit + min(slab, remaining_income), rate * 100, slab_tax))
+            remaining_income -= min(slab, remaining_income)
         start_limit += slab
 
     # Marginal relief (if applicable)
@@ -88,7 +83,7 @@ if st.button("Calculate Tax"):
     if st.checkbox("Show Tax & Cess Breakup"):
         st.write("### **Tax Breakdown:**")
         for start, end, rate, slab_tax in tax_breakup:
-            st.markdown(f"✔ **₹{start} - ₹{end} @ {rate}%** = ₹{slab_tax}")
+            st.write(f"✔ **₹{start} - ₹{end} @ {rate}%** = ₹{slab_tax}")
 
         st.write(f"### **Cess (4%) = ₹{cess}**")
 
